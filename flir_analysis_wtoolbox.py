@@ -121,6 +121,19 @@ for i,group in enumerate(all_flattened):
         all_comparisons[key]=stats.ttest_ind(all_flattened[group], all_flattened[other_group])
 axs.legend(loc='upper left')
 fig2.tight_layout()
+#use seabron to plot
+table={"ID":[],"Stress":[],"Sex":[],"Chow":[],"Treatment":[],"Mean_Temp":[]}
+for key,value in results.items():
+    table["ID"].append(key.split("_")[0])
+    table["Stress"].append(groups[key][0])
+    table["Sex"].append(groups[key][1])
+    table["Chow"].append(groups[key][2])
+    table["Treatment"].append(groups[key][3])
+    table["Mean_Temp"].append(np.mean(value))
+table=pd.DataFrame(table)
+import seaborn as sns
+sns.catplot(data=table, kind='bar', y='Mean_Temp',x="Treatment",hue='Chow',col='Sex',row='Stress')
+
 #exports a csv doc with mean temps
 output = {item:np.average(results[item]) for item in results}
 df=pd.DataFrame.from_dict(output,orient='index')
