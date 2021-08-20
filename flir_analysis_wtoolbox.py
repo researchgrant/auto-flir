@@ -14,6 +14,8 @@ import os
 from matplotlib import pyplot as plt
 import pdb
 from scipy import stats
+import matplotlib as mpl
+mpl.use("TkAgg")
 
 folderName = askdirectory()
 fileList = [file for file in os.listdir(folderName) if file.endswith('.jpg')]
