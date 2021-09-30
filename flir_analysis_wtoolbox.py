@@ -15,7 +15,7 @@ from matplotlib import pyplot as plt
 import pdb
 from scipy import stats
 import matplotlib as mpl
-mpl.use("TkAgg")
+# mpl.use("TkAgg")
 
 folderName = askdirectory()
 fileList = [file for file in os.listdir(folderName) if file.endswith('.jpg')]
@@ -35,7 +35,7 @@ def tempToGrey(x):
     return 255*(x/33)
 
 def getTemp(file):
-    fig,axs=plt.subplots(1,4)
+
     image = PIL.Image.open(folderName+'/'+file)
     im_ar = np.array(image)
     img = cv2.cvtColor(im_ar, cv2.COLOR_BGR2RGB)
@@ -73,6 +73,7 @@ def getTemp(file):
         if k != -1:
             break
     # loop over the contours
+    fig,axs=plt.subplots(1,4)
     axs[0].imshow(thresh1)
     axs[1].imshow(thermal_image)
     try:
